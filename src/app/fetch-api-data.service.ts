@@ -41,7 +41,7 @@ export class UserRegistrationService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -91,7 +91,10 @@ export class UserRegistrationService {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
   }
 
   // Get favorite movies for a user
@@ -107,7 +110,10 @@ export class UserRegistrationService {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
   }
 
   // Edit user
@@ -133,7 +139,10 @@ export class UserRegistrationService {
           Authorization: 'Bearer ' + token,
         })
 
-    }).pipe(catchError(this.handleError));
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
   }
 
   // Delete a movie from the favorite movies
@@ -162,7 +171,7 @@ export class UserRegistrationService {
   }
 
   // Non-typed response extraction
-  private extractResponseData(res: Response): any {
+  private extractResponseData(res: Response | {}): any {
     const body = res;
     return body || {};
   }
