@@ -1,0 +1,58 @@
+h3 {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 25px;
+}
+
+.update-container {
+  margin: 24px auto;
+  padding: 20px, 0px;
+  width: 100%;
+}  
+
+.favMovies-container {
+  padding: 5%;
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  gap: 16px;
+}
+
+.favMovie-card-container {
+  margin: 24px auto;
+  width: 80%;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.update-form,
+.update-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  color: 'primary';
+  flex-direction: column;
+  display: flex;
+}
+.btn-remove {
+color: darkred;
+}
+.favMovie-card-actions-container {
+text-align: center;
+}
+
+.title {
+  border-bottom: 1px solid;
+}
+
+.update-form {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}

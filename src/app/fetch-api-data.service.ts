@@ -11,13 +11,12 @@ const apiUrl = 'https://allmymovies.herokuapp.com/'
   providedIn: 'root'
 })
 
-export class UserRegistrationService {
+export class FetchApiDataService {
   // Inject HttpClient module to the constructor params to provide it to the entire class, making it available via thos.http
   constructor(private http: HttpClient) {
   }
   // User registration
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe
       (
         catchError(this.handleError)
@@ -26,7 +25,6 @@ export class UserRegistrationService {
 
   // User login
   public userLogin(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http
       .post(apiUrl + 'login', userDetails)
       .pipe(catchError(this.handleError));
@@ -41,7 +39,7 @@ export class UserRegistrationService {
           Authorization: 'Bearer ' + token,
         })
     }).pipe(
-      // map(this.extractResponseData),
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -91,7 +89,10 @@ export class UserRegistrationService {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
   }
 
   // Get favorite movies for a user
@@ -107,7 +108,10 @@ export class UserRegistrationService {
           Authorization: 'Bearer ' + token,
         }),
       })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
   }
 
   // Edit user
@@ -133,7 +137,10 @@ export class UserRegistrationService {
           Authorization: 'Bearer ' + token,
         })
 
-    }).pipe(catchError(this.handleError));
+    }).pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
   }
 
   // Delete a movie from the favorite movies
@@ -162,7 +169,7 @@ export class UserRegistrationService {
   }
 
   // Non-typed response extraction
-  private extractResponseData(res: Response): any {
+  private extractResponseData(res: Response | {}): any {
     const body = res;
     return body || {};
   }
