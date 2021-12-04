@@ -2,7 +2,7 @@
 <div class='profile-container'>
   <!-- Favorite movies -->
   <section>
-    <h2>Your Favorite Movies</h2>
+    <h3>Your Favorite Movies</h3>
     <div class='favMovies-container'>
       <mat-card class='favMovie-card-container' *ngFor='let favorite of favMovies'>
         <mat-card-header class='favMovie-card-header'>
@@ -29,7 +29,8 @@
           (click)='editUser()'>
           Update
         </button>
-        <button aria-label='button that removes user account' class='btn' mat-raised-button (click)='deleteUser()'>
+        <button aria-label='button that removes user account' class='btn-remove' mat-raised-button
+          (click)='deleteUser()'>
           Remove Account
         </button>
       </mat-card-actions>
