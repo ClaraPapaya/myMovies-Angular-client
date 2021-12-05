@@ -6,7 +6,7 @@ h3 {
 
 .update-container {
   margin: 24px auto;
-  padding: 20px, 0px;
+  padding: 20px 0px;
   width: 100%;
 }  
 
@@ -38,9 +38,11 @@ h3 {
   flex-direction: column;
   display: flex;
 }
+
 .btn-remove {
 color: darkred;
 }
+
 .favMovie-card-actions-container {
 text-align: center;
 }
