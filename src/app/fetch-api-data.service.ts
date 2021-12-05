@@ -99,11 +99,11 @@ export class FetchApiDataService {
   // No endpoint available in API for this 
 
   // Add a movie to favorite Movies
-  public addFavoriteMovie(id: string): Observable<any> {
+  public addFavoriteMovie(MovieId: string): Observable<any> {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
     return this.http
-      .post(apiUrl + `users/${user}/Movies/${id}`, id, {
+      .post(apiUrl + `users/${user}/movies/${MovieId}`, MovieId, {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + token,
         }),
