@@ -15,6 +15,13 @@ export class UserProfileComponent implements OnInit {
   movies: any[] = [];
   favMovies: any = [];
 
+  /**
+   * 
+   * @param fetchApiData 
+   * @param router 
+   * @param snackBar 
+   * @param dialog 
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public router: Router,
@@ -26,6 +33,9 @@ export class UserProfileComponent implements OnInit {
     this.getUser();
   }
 
+  /**
+   * gets user's profile information and favorite users
+   */
   getUser(): void {
     let FavoriteMovies = localStorage.getItem('FavoriteMovies');
     let Username = localStorage.getItem('User');
@@ -40,6 +50,9 @@ export class UserProfileComponent implements OnInit {
     this.getMovies();
   }
 
+  /**
+   * gets list of all movies
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -47,6 +60,10 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * filters movies according to them being added as favorite movies
+   * @returns the user's favorite movies
+   */
   filterFavorites(): void {
     this.movies.forEach((movie: any) => {
       if (this.user.FavoriteMovies.includes(movie._id)) {
@@ -56,6 +73,11 @@ export class UserProfileComponent implements OnInit {
     return this.user.FavoriteMovies;
   }
 
+  /**
+   * removes movies from user's favorite movies list
+   * @param id 
+   * @param title 
+   */
   removeFavorites(id: string, title: string): void {
     this.fetchApiData.deleteFromFavMovie(id).subscribe((resp: any) => {
       let favMovies = resp.FavoriteMovies;
@@ -69,28 +91,28 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * opens dialog to edit user details
+   */
   editUser(): void {
     this.dialog.open(UserProfileUpdateComponent, {
       width: '350px'
     });
   }
 
+  /**
+   * deletes user's profile
+   */
   deleteUser(): void {
-    this.fetchApiData.deleteUser().subscribe(
-      (resp: any) => {
-        this.snackBar.open('Your account has been deleted!', 'Ok', {
-          duration: 2000,
-        });
-        localStorage.clear();
-      },
-      (result) => {
-        this.snackBar.open(result, 'OK', {
-          duration: 2000,
-        });
-        this.router.navigate(['/welcome']).then(() => {
-          window.location.reload();
-        });
-      }
+    this.fetchApiData.deleteUser().subscribe(() => {
+      this.snackBar.open('Your account has been deleted!', 'Ok', {
+        duration: 2000,
+      });
+      localStorage.clear();
+      this.router.navigate(['/welcome']).then(() => {
+        window.location.reload();
+      });
+    }
     );
   }
 }

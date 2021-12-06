@@ -11,6 +11,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 })
 export class NavBarComponent implements OnInit {
 
+  /**
+   * shows user exisiting routes in app
+   * @param snackBar 
+   * @param router 
+   * @param toolbar 
+   */
   constructor(
     public snackBar: MatSnackBar,
     public router: Router,
@@ -20,6 +26,9 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * logs out user and routes back to welcome page
+   */
   logoutUser(): void {
     localStorage.clear();
     this.router.navigate(['welcome']);

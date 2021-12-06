@@ -13,6 +13,13 @@ import { DetailsDialogComponent } from '../details-dialog/details-dialog.compone
 })
 export class MovieCardComponent implements OnInit {
   movies: any[] = [];
+
+  /**
+   * 
+   * @param fetchApiData 
+   * @param dialog 
+   * @param snackBar 
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -23,6 +30,9 @@ export class MovieCardComponent implements OnInit {
     this.getMovies();
   }
 
+  /**
+   * gets a list of all movies
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -31,6 +41,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * opens dialog with genre information
+   * @param name 
+   * @param description 
+   */
   showGenreDialog(
     name: string,
     description: string
@@ -40,6 +55,13 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * opens dialog with director information
+   * @param name 
+   * @param bio 
+   * @param birth 
+   * @param death 
+   */
   showDirectorDialog(
     name: string,
     bio: string,
@@ -51,6 +73,14 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * opens dialog with more movie information
+   * @param title 
+   * @param imagePath 
+   * @param description 
+   * @param director 
+   * @param genre 
+   */
   showDetailsDialog(
     title: string,
     imagePath: string,
@@ -63,6 +93,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  /**
+   * adds movie to user's favorite movies list
+   * @param id 
+   * @param title 
+   */
   addFavorite(
     id: string,
     title: string)
